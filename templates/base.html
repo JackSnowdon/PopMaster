@@ -16,12 +16,29 @@
     <!-- NavBar -->
 
     <nav class="navbar navbar-expand-lg nav-bg fixed-top">
-        <a class="navbar-brand" href="#"><i class="fas fa-home"></i></a>
+        <a class="navbar-brand" href="{% url 'index' %}"><i class="fas fa-home"></i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars fa-lg nav-button"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <!--- Below LI displays active user logged in -->
+                <li class="nav-item logged-in">Logged in as: <span class="capitalize">{{user}}</span></li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'registration' %}">Register</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
