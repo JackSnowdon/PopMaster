@@ -14,14 +14,23 @@
     <div class="row mb-5">
         <div class="col-md-4 col-12">
             <h2>{{ quiz }}</h2>
-            <h5>Questions: /{{ quiz.amount_of_questions }}</h5>
+            <h5>Questions: {{ quiz.questions.count }}/{{ quiz.amount_of_questions }}</h5>
             <div class="ml-2 mt-3">
                 <p>Created on: {{ quiz.created_on }}</p>
                 <p>Last updated: {{ quiz.last_updated }}</p>
                 <p>Created by: {{ quiz.created_by }}</p>
             </div>
+            <a href="{% url 'add_question_to_quiz' quiz.pk %}" role="button" class="btn btn-success" aria-disabled="false">Add Question</a>
         </div>
         <div class="col-md-8 col-12">
+            <ul class="list-group">
+                {% for q in quiz.questions.all %}
+                <a href="" class="quiz-link">
+                    <li class="list-group-item">{{ q.order }} {{ q }}
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </section>

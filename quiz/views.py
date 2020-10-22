@@ -74,3 +74,25 @@ def edit_quiz(request, pk):
         )
         return redirect("index")
 
+
+@login_required
+def add_question_to_quiz(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk)
+    profile = request.user.profile
+    if quiz.created_by == profile or profile.staff_access:
+        if request.method == "POST":
+            question_form = AddQuestionForm(request.POST)
+            if question_form.is_valid():
+                form = question_form.save(commit=False)
+                form.quiz = quiz
+                form.save()
+                messages.error(request, f"Edited {quiz}", extra_tags="alert")
+                return redirect("quiz", quiz.pk)    
+        else:
+            question_form = AddQuestionForm()
+            return render(request, "add_question_to_quiz.html", {"question_form": question_form, "quiz": quiz})
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+        return redirect("index")

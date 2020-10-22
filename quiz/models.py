@@ -19,3 +19,13 @@ class Quiz(models.Model):
     class Meta:
         verbose_name = _("Quiz")
         verbose_name_plural = _("Quizzes")
+
+
+class Question(models.Model):
+    quest = models.CharField(max_length=255)
+    quiz = models.ForeignKey(Quiz, related_name='questions', on_delete=models.CASCADE)
+    answer = models.CharField(max_length=255)
+    order = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(500)], default=1)
+
+    def __str__(self):
+        return self.quest

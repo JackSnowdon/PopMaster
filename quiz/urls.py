@@ -7,5 +7,5 @@ urlpatterns = [
     path(r'quiz/<int:pk>/', quiz, name="quiz"),
     path(r'delete_quiz/<int:pk>/', delete_quiz, name="delete_quiz"),
     path(r'edit_quiz/<int:pk>/', edit_quiz, name="edit_quiz"),
-    
+    path(r'add_question_to_quiz/<int:pk>/', add_question_to_quiz, name="add_question_to_quiz"),
 ]

@@ -12,3 +12,10 @@ class QuizForm(forms.ModelForm):
             'amount_of_questions': 'Number of questions'
         }
 
+
+class AddQuestionForm(forms.ModelForm):
+
+    class Meta:
+        model = Question
+        exclude = ['quiz']
+
