@@ -8,4 +8,20 @@
     </div>
 </section>
 
+
+<section class="quizzes">
+    <div class="row">
+        <div class="col-6">
+            <h3>All Quizzes:</h3>
+            <a href="{% url 'create_quiz' %}" role="button" class="btn btn-success mb-3" aria-disabled="false">Create New Quiz</a>
+            <ul class="list-group">
+                {% for q in qzs %}
+                <li class="list-group-item"><a href="#" class="z">{{ q }} {{ q.created_on }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
