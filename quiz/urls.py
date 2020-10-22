@@ -6,6 +6,6 @@ urlpatterns = [
     path('create_quiz/', create_quiz, name="create_quiz"),
     path(r'quiz/<int:pk>/', quiz, name="quiz"),
     path(r'delete_quiz/<int:pk>/', delete_quiz, name="delete_quiz"),
-    path(r'edit_quiz_question_limit/<int:pk>/', edit_quiz_question_limit, name="edit_quiz_question_limit"),
+    path(r'edit_quiz/<int:pk>/', edit_quiz, name="edit_quiz"),
     
 ]

@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block page_title %} Updated {{ quiz }} {% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block page_title %} Edit {{ quiz }} {% endblock %} {% block content %}
 
 <section class="button-nav">
     <div class="row mb-5">
@@ -14,10 +14,13 @@
     </div>
 </div>
 
-<form role="form" method="post" id="edit_quiz_form" action="{% url 'edit_quiz_question_limit' quiz.pk %}">
+<form role="form" method="post" id="edit_quiz_form" action="{% url 'edit_quiz' quiz.pk %}">
     <div class="form-group body-text">
         {% csrf_token %}
         <div class="form-row">
+            <div class="form-group col-8">
+                {{ quiz_form.name|as_crispy_field }}
+            </div>
             <div class="form-group col-4">
                 {{ quiz_form.amount_of_questions|as_crispy_field }}
             </div>

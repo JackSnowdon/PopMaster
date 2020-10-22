@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 
-class NewQuizForm(forms.ModelForm):
+class QuizForm(forms.ModelForm):
 
     class Meta:
         model = Quiz
@@ -12,12 +12,3 @@ class NewQuizForm(forms.ModelForm):
             'amount_of_questions': 'Number of questions'
         }
 
-
-class EditQuizQuestionLimit(forms.ModelForm):
-
-    class Meta:
-        model = Quiz
-        fields = ['amount_of_questions']
-        labels = {
-            'amount_of_questions': 'Number of questions'
-        }

@@ -17,7 +17,7 @@ def quiz_index(request):
 @login_required
 def create_quiz(request):
     if request.method == "POST":
-        quiz_form = NewQuizForm(request.POST)
+        quiz_form = QuizForm(request.POST)
         if quiz_form.is_valid():
             form = quiz_form.save(commit=False)
             form.created_by = request.user.profile
@@ -25,7 +25,7 @@ def create_quiz(request):
             messages.error(request, "Created New Quiz", extra_tags="alert")
             return redirect("quiz_index")    
     else:
-        quiz_form = NewQuizForm()
+        quiz_form = QuizForm()
     return render(request, "create_quiz.html", {"quiz_form": quiz_form})
 
 
@@ -54,20 +54,20 @@ def delete_quiz(request, pk):
 
 
 @login_required
-def edit_quiz_question_limit(request, pk):
+def edit_quiz(request, pk):
     quiz = get_object_or_404(Quiz, pk=pk)
     profile = request.user.profile
     if quiz.created_by == profile or profile.staff_access:
         if request.method == "POST":
-            quiz_form = EditQuizQuestionLimit(request.POST, instance=quiz)
+            quiz_form = QuizForm(request.POST, instance=quiz)
             if quiz_form.is_valid():
                 form = quiz_form.save(commit=False)
                 form.save()
-                messages.error(request, f"Edited {quiz} question limit", extra_tags="alert")
+                messages.error(request, f"Edited {quiz}", extra_tags="alert")
                 return redirect("quiz", quiz.pk)    
         else:
-            quiz_form = EditQuizQuestionLimit(instance=quiz)
-            return render(request, "edit_quiz_question_limit.html", {"quiz_form": quiz_form, "quiz": quiz})
+            quiz_form = QuizForm(instance=quiz)
+            return render(request, "edit_quiz.html", {"quiz_form": quiz_form, "quiz": quiz})
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
