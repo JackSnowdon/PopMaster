@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load static %} {% block page_title %} {{ quiz }}{% endblock %} {% block content %}
+
+<section class="button-nav">
+    <div class="row mb-5">
+        <div class="col-12">
+            <a href="{% url 'quiz_index' %}" role="button" class="btn btn-warning" aria-disabled="false">Quizzes</a>
+            <a href="{% url 'delete_quiz' quiz.pk %}" role="button" class="btn btn-danger" aria-disabled="false" onclick="return confirm('Delete {{ quiz }}?');">Delete</a>
+        </div>
+    </div>
+</section>
+
+<section class="header">
+    <div class="row mb-5">
+        <div class="col-md-4 col-12">
+            <h2>{{ quiz }}</h2>
+            <div class="ml-2 mt-3">
+                <p>Created on: {{ quiz.created_on }}</p>
+                <p>Last updated: {{ quiz.last_updated }}</p>
+                <p>Created by: {{ quiz.created_by }}</p>
+            </div>
+        </div>
+        <div class="col-md-8 col-12">
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

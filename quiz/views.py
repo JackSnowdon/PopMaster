@@ -6,6 +6,8 @@ from .forms import *
 
 # Create your views here.
 
+# Quizzes
+
 def quiz_index(request):
     profile = request.user.profile
     qzs = profile.quizzes.all().order_by("-created_on")
@@ -25,3 +27,27 @@ def create_quiz(request):
     else:
         quiz_form = NewQuizForm()
     return render(request, "create_quiz.html", {"quiz_form": quiz_form})
+
+
+@login_required
+def quiz(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk)
+    profile = request.user.profile
+    return render(request, "quiz.html", {"quiz": quiz, "profile": profile})
+
+
+@login_required
+def delete_quiz(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk)
+    profile = request.user.profile
+    if quiz.created_by == profile or profile.staff_access:
+        quiz.delete()
+        messages.error(
+            request, f"Deleted {quiz}", extra_tags="alert"
+        )
+        return redirect(reverse('quiz_index'))
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+        return redirect("index") 

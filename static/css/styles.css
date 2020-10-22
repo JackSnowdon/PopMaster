@@ -41,6 +41,34 @@
 }
 
 
+/* Quiz Link */
+
+.list-group-item {
+    color: #1D1115;
+    transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+}
+
+.list-group-item:hover {
+    background-color: #dedfde;
+    text-decoration: none;
+}
+
+.quiz-link {
+    color: #1D1115;
+    transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+}
+
+.quiz-link:hover {
+    text-decoration: none;
+}
+
+
 /* Footer */
 
 .social-icons a {
