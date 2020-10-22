@@ -13,6 +13,9 @@
     <div class="row mb-5">
         <div class="col-md-4 col-12">
             <h2>{{ quiz }}</h2>
+            <a href="{% url 'edit_quiz_question_limit' quiz.pk %}">
+                <h5>Max Questions: {{ quiz.amount_of_questions }}</h5>
+            </a>
             <div class="ml-2 mt-3">
                 <p>Created on: {{ quiz.created_on }}</p>
                 <p>Last updated: {{ quiz.last_updated }}</p>

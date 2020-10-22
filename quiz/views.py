@@ -50,4 +50,27 @@ def delete_quiz(request, pk):
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
-        return redirect("index") 
+        return redirect("index")
+
+
+@login_required
+def edit_quiz_question_limit(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk)
+    profile = request.user.profile
+    if quiz.created_by == profile or profile.staff_access:
+        if request.method == "POST":
+            quiz_form = EditQuizQuestionLimit(request.POST, instance=quiz)
+            if quiz_form.is_valid():
+                form = quiz_form.save(commit=False)
+                form.save()
+                messages.error(request, f"Edited {quiz} question limit", extra_tags="alert")
+                return redirect("quiz", quiz.pk)    
+        else:
+            quiz_form = EditQuizQuestionLimit(instance=quiz)
+            return render(request, "edit_quiz_question_limit.html", {"quiz_form": quiz_form, "quiz": quiz})
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+        return redirect("index")
+

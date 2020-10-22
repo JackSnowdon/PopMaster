@@ -18,8 +18,11 @@
     <div class="form-group body-text">
         {% csrf_token %}
         <div class="form-row">
-            <div class="form-group col-12">
+            <div class="form-group col-8">
                 {{ quiz_form.name|as_crispy_field }}
+            </div>
+            <div class="form-group col-4">
+                {{ quiz_form.amount_of_questions|as_crispy_field }}
             </div>
         </div>
         <br>

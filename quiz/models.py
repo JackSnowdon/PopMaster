@@ -11,6 +11,7 @@ class Quiz(models.Model):
     created_by = models.ForeignKey(Profile, related_name='quizzes', on_delete=models.CASCADE)
     last_updated = models.DateField(auto_now=True)
     active = models.BooleanField(default=False)
+    amount_of_questions = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(25)], default=1)
 
     def __str__(self):
         return self.name
